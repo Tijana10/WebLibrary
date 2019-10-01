@@ -1,0 +1,52 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html">
+      
+<h:head>
+	<title>Testna forma</title>
+</h:head>
+<h:body>
+	<h:form>
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Author" />
+			<h:inputText value="#{searchBooksBean.author}" />
+			<h:outputLabel value="Title" />
+			<h:inputText value="#{searchBooksBean.title}" />
+			<h:outputLabel value="ISBN" />
+			<h:inputText value="#{searchBooksBean.isbn}" />
+			<h:outputLabel value="Category" />
+			<h:selectOneMenu value="#{searchBooksBean.category}">
+				<f:selectItems value="#{addBookBean.bookDTO.categories}" var="c">
+					<f:selectItem value="#{c.name()}"/>
+				</f:selectItems>
+			</h:selectOneMenu>
+		</h:panelGrid>
+		<h:commandButton action="#{searchBooksBean.searchBooks()}" value="Search" />
+	</h:form>
+	<br/>
+	<h:dataTable value="#{searchBooksBean.results}" var="book" headerClass="order-table-header" styleClass="order-table" rowClasses="order-table-even-row,order-table-odd-row">
+		<h:column>
+			<f:facet name="header">Author</f:facet>
+			<h:outputLabel value="#{book.author}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">Title</f:facet>
+			<h:outputLabel value="#{book.title}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">ISBN</f:facet>
+			<h:outputLabel value="#{book.isbn}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">Category</f:facet>
+			<h:outputLabel value="#{book.category}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">Description</f:facet>
+			<h:outputLabel value="#{book.description}" />
+		</h:column>
+	</h:dataTable>
+
+</h:body>
+
+</html>

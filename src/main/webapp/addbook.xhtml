@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html">
+ 
+<f:view locale="#{languageBean.locale}"> 
+   
+<h:head>
+	<title>Testna forma</title>
+</h:head>
+<h:body>
+	<h:selectOneMenu value="#{languageBean.language}" onchange="submit()">
+		<f:selectItem itemValue="en" itemLabel="English"/>
+		<f:selectItem itemValue="sr" itemLabel="Srpski"/>
+	</h:selectOneMenu>
+	<br/>
+	<h:form>
+		<h:panelGrid columns="2">
+			<h:outputLabel value="#{labels.author}" />
+			<h:inputText value="#{addBookBean.bookDTO.author}" />
+			<h:outputLabel value="#{labels.title}" />
+			<h:inputText value="#{addBookBean.bookDTO.title}" />
+			<h:outputLabel value="#{labels.isbn}" />
+			<h:inputText value="#{addBookBean.bookDTO.isbn}" />
+			<h:outputLabel value="#{labels.category}" />
+			<h:selectOneMenu value="#{addBookBean.bookDTO.category}">
+				<f:selectItems value="#{addBookBean.bookDTO.categories}" var="c">
+					<f:selectItem value="#{c.name()}"/>
+				</f:selectItems>
+			</h:selectOneMenu>
+			<h:outputLabel value="#{labels.description}" />
+			<h:inputTextarea value="#{addBookBean.bookDTO.description}" />
+		</h:panelGrid>
+		<h:commandButton action="#{addBookBean.createBook()}" value="#{labels.save}" />
+	</h:form>
+	<h:link outcome="booklist" value="#{labels.listbooks}"/>
+
+</h:body>
+
+</f:view> 
+
+</html>

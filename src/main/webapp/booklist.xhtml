@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html">
+      
+<h:head>
+	<h:outputStylesheet library="css" name="layout.css"/>
+	<h:outputStylesheet library="css" name="list.css" />
+	<title>Books</title>
+</h:head>
+<h:body>
+<div class="left"></div>
+<div class="center">
+	<h:dataTable value="#{booklistBean.books}" var="book" headerClass="order-table-header" styleClass="order-table" rowClasses="order-table-even-row,order-table-odd-row">
+		<h:column>
+			<f:facet name="header">Author</f:facet>
+			<h:outputLabel value="#{book.author}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">Title</f:facet>
+			<h:outputLabel value="#{book.title}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">ISBN</f:facet>
+			<h:outputLabel value="#{book.isbn}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">Category</f:facet>
+			<h:outputLabel value="#{book.category}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">Description</f:facet>
+			<h:outputLabel value="#{book.description}" />
+		</h:column>
+	</h:dataTable>
+	<h:form>
+		<h:selectOneMenu value="#{booklistBean.booksPerPage}">
+			<f:selectItem itemValue="5" itemLabel="5"/>
+			<f:selectItem itemValue="10" itemLabel="10"/>
+			<f:selectItem itemValue="20" itemLabel="20"/>
+		</h:selectOneMenu>
+		<h:outputLabel value="Page #{booklistBean.page} of #{booklistBean.pages} pages." />
+		<h:commandButton action="#{booklistBean.showBooks()}" value="Refresh" />
+		<h:commandButton action="#{booklistBean.nextPage()}" value="Next page" />
+	</h:form>
+	<h:link outcome="addbook" value="New book..."/>
+</div>
+<div class="right"></div>
+
+</h:body>
+
+</html>
